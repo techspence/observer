@@ -34,3 +34,4 @@ A blue team tool for watching over domains using bug hunting methodology!
 - New certificates issued
 - New ports available
 - New services or versions
+- New findings on google, pastebin, etc.
