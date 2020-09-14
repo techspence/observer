@@ -14,7 +14,7 @@ domains="valid_domains.txt"
 rootdn="spenceralessi.com"
 expiredHeader="The certificate(s) on the following host(s) have expired:"
 expiringSoonHeader="The certificate(s) on the following host(s) will be expiring soon"
-webHook="https://hooks.slack.com/services/<webhookurl>"
+webHook="https://hooks.slack.com/services/<webhookURL>"
 
 function getExpiration () {
 	expiredays=$(echo $(( ($(date -d $1 +%s) - $(date -d $2 +%s)) / 86400 )) )
@@ -123,6 +123,7 @@ elif [[ ${notExpiringHosts[@]} ]]; then
 	hostData=$(for h in ${notExpiringHosts[@]}; do echo $h; done)
 	echo "Not expiring soon:"
 	echo ${hostData[@]}
+	sendAlert "${hostData[@]}" ok "Certificates for the following domains are not expiring soon"
 else
 	: # do nothing
 fi
