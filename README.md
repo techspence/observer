@@ -35,3 +35,24 @@ A blue team tool for watching over domains using bug hunting methodology!
 - New ports available
 - New services or versions
 - New findings on google, pastebin, etc.
+
+
+## High Level Workflow
+- Subdomain Enumeration > New Subdomain Alerting > Subdomain DNS Validation > Certificate Monitoring
+
+Step 1. Enumerate domains based on our IPs (since we know them all)
+`amass enum -silent -ip -src -addr <IP Ranges> -d <DOMAIN>`
+
+Step 2. Feed the output of Step 1. (`DomainMonitor`) to Step 2. (massdns)
+`massdns -r resolvers.txt -t A -o S -w results.txt amass_domains.txt`
+
+Step 2a. Export just subdomains
+`cat results.txt | awk '{print $1}' | sed 's/.$//' | sort -u > valid_domains.txt`
+
+Step 3. Feed Step 2a. (`valid_domains`) to certmon
+
+
+## Inspiration
+- https://0xpatrik.com/subdomain-enumeration-2019/
+- Jason Haddix Bughunter Methodology - https://www.youtube.com/watch?v=gIz_yn0Uvb8
+- https://medium.com/@noobhax/my-recon-process-dns-enumeration-d0e288f81a8a
