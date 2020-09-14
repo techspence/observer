@@ -41,12 +41,15 @@ A blue team tool for watching over domains using bug hunting methodology!
 - Subdomain Enumeration > New Subdomain Alerting > Subdomain DNS Validation > Certificate Monitoring
 
 **Step 1.** Passively enumerate domains with Amass
+
 `/opt/Amass/amass enum --passive -d spenceralessi.com -o amass_domains.txt`
 
 **Step 2.** Feed the output of Step 1. to Step 2. to validate subdomains with massdns
+
 `/opt/massdns/bin/massdns -r /opt/massdns/lists/resolvers.txt -t A -o S -w massdns_domains.txt amass_domains.txt > /dev/null 2>&1`
 
 Then Export just subdomains
+
 `cat massdns_domains.txt | awk '{print $1}' | sed 's/.$//' | sort -u > valid_domains.txt`
 
 **Step 3.** Feed Step 2a. to certificate monitoring
