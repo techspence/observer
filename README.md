@@ -8,46 +8,46 @@ A blue team tool for watching over domains using bug hunting methodology!
 	b) find things that require more manual checking but can be scripted or automated to some extent
 	c) track, monitor and alert on changes, deviations and other potentially interesting things
 
+## Current & ToDo Features
 **Passive Recon**
-- Potential new subdomains
-- Potential new IPs
-- Google dorking
-- Pastebin
-- Github searching
-- theHarvester email scraping
-- Interesting content
-- Technology used
+[x] Potential new subdomains
+[] Potential new IPs
+[] Google dorking
+[] Pastebin
+[] Github searching
+[] theHarvester email scraping
+[] Interesting content
+[] Technology used
 
 **Active Recon**
-- Verify subdomains
-- Certificate expiration check
-- New certificates issued
-- Open ports
-- Services and versions
-- Technology used
-- Login form https only
-- Nikto
+[x] Verify subdomains
+[x] Certificate expiration check
+[] New certificates issued
+[] Open ports
+[] Services and versions
+[] Technology used
+[] Login form https only
+[] Nikto
 
 **Changes to track/monitor/alert on**
-- New/Removed/Modified subdomains
-- Certificate expired/expiring soon
-- New certificates issued
-- New ports available
-- New services or versions
-- New findings on google, pastebin, etc.
-
+[x] New/Removed/Modified subdomains
+[x] Certificate expired/expiring soon
+[] New certificates issued
+[] New ports available
+[] New services or versions
+[] New findings on google, pastebin, etc.
 
 ## High Level Workflow
 - Subdomain Enumeration > New Subdomain Alerting > Subdomain DNS Validation > Certificate Monitoring
 
-Step 1. Enumerate domains based on our IPs (since we know them all)
-`amass enum -silent -ip -src -addr <IP Ranges> -d <DOMAIN>`
+Step 1. Passively enumerate domains with Amass
+`/opt/Amass/amass enum --passive -d spenceralessi.com -o amass_domains.txt`
 
-Step 2. Feed the output of Step 1. (`DomainMonitor`) to Step 2. (massdns)
-`massdns -r resolvers.txt -t A -o S -w results.txt amass_domains.txt`
+Step 2. Feed the output of Step 1. (`DomainMonitor`) to Step 2. to validate subdomains with massdns
+`/opt/massdns/bin/massdns -r /opt/massdns/lists/resolvers.txt -t A -o S -w massdns_domains.txt amass_domains.txt > /dev/null 2>&1`
 
 Step 2a. Export just subdomains
-`cat results.txt | awk '{print $1}' | sed 's/.$//' | sort -u > valid_domains.txt`
+`cat massdns_domains.txt | awk '{print $1}' | sed 's/.$//' | sort -u > valid_domains.txt`
 
 Step 3. Feed Step 2a. (`valid_domains`) to certmon
 
