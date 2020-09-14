@@ -12,3 +12,6 @@ else
     --data '{"text":"'"$hosts"'"}' https://hooks.slack.com/services/<webhookurl> \
     --silent --output /dev/null --show-error --fail
 fi
+
+# Validate domains
+./dnsvalidate.sh
