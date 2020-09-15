@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Alternative way to enumerate
+# Use all your known IPs and give amass your domain
+# /opt/Amass/amass enum -silent -ip -src -addr <my.ip.range.here-my.ending.ip.range> -d <DOMAIN>
+
 /opt/Amass/amass enum -silent -d spenceralessi.com -o amass_domains.txt
 
 hosts=$(/opt/Amass/amass track -d spenceralessi.com -last 2)
