@@ -58,5 +58,7 @@ Then Export just subdomains
 
 ## Inspiration
 - https://0xpatrik.com/subdomain-enumeration-2019/
-- Jason Haddix Bughunter Methodology - https://www.youtube.com/watch?v=gIz_yn0Uvb8
+- Jason Haddix Bughunter Methodology 
+  - https://www.youtube.com/watch?v=gIz_yn0Uvb8
+  - https://docs.google.com/presentation/d/1MWWXXRvvesWL8V-GiwGssvg4iDM58_RMeI_SZ65VXwQ/edit
 - https://medium.com/@noobhax/my-recon-process-dns-enumeration-d0e288f81a8a
