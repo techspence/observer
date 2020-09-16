@@ -5,6 +5,3 @@
 
 # Export only domains/subdomains & remove duplicates
 cat massdns_domains.txt | awk '{print $1}' | sed 's/.$//' | sed 's|www.||g' | sort -u > valid_domains.txt
-
-# Run certmon.sh
-./certmon.sh
