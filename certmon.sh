@@ -26,9 +26,6 @@ function sendAlert () {
 	hosts=$1
 	emoji=":$2:"
 	messageHeader="*$3*"
-	echo $hosts
-	echo $emoji
-	echo $messageHeader
 	curl -X POST -H 'Content-type: application/json' \
 	  --data '{"text":"'"$emoji $messageHeader \n\n ${hosts[@]}"'","type":"mrkdwn"}' $webHook \
 	  --silent --output /dev/null --show-error --fail
