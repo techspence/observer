@@ -8,6 +8,8 @@ A blue team tool for watching over domains using bug hunting methodology!
 	- b) find things that require more manual checking but can be scripted or automated to some extent
 	- c) track, monitor and alert on changes, deviations and other potentially interesting things
 
+**_Note: This tool has some functionality but is still a work in progress :O)_**
+
 ## Requirements
 - Amass
 - Massdns
